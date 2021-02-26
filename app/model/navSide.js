@@ -3,9 +3,8 @@ module.exports = app => {
     let Schema = mongoose.Schema;
     const NavSideSchema = new Schema({
       home: {
-        type: String,
+        type: Object,
         required: true,
-        name: '首页',
       },
       shop: {
         type: String,
