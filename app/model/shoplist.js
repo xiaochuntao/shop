@@ -16,15 +16,15 @@ module.exports = app => {
     },
     shopAt1: {
       type: String,
-      required: true
+      //required: true
     },
     shopAt2: {
       type: String,
-      required: true
+     // required: true
     },
     shopAt3: {
       type: String,
-      required: true
+      //required: true
     },
     shopNumber: {
       type: Number,
@@ -32,10 +32,10 @@ module.exports = app => {
     },
     shopTime: {
       type: String,
-
     },
     shopImages: {
       type: String,
+      //required: true
     },
   })
   return mongoose.model('Shoplist', ShopSchema)

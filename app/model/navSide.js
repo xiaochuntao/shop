@@ -6,11 +6,6 @@ module.exports = app => {
         type: String,
         required: true,
         name: '首页',
-        children: [
-          {
-            carousel: '轮播图'
-          }
-        ]
       },
       shop: {
         type: String,

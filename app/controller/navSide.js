@@ -6,7 +6,7 @@ class UserController extends Controller {
   async addNavSidel() {
     // 接收前端传递的参数
     let { ctx, app } = this;
-      // 添加
+    // 添加
     let navSide = new app.model.NavSide(ctx.request.body)
     await navSide.save()
     ctx.body = {
@@ -27,15 +27,19 @@ class UserController extends Controller {
           children: [
             {
               name: '轮播图',
+              path: '/carousel'
             },
             {
-              name: '好评排行'
+              name: '好评排行',
+              path: '/praise'
             },
             {
-              name: '新品好物'
+              name: '新品好物',
+              path: '/newProducts'
             },
             {
-              name: '推荐'
+              name: '推荐',
+              path: '/recommend'
             },
           ]
         },
@@ -43,13 +47,16 @@ class UserController extends Controller {
           name: '商品',
           children: [
             {
-              name: '商品列表'
+              name: '商品列表',
+              path: '/shopList'
             },
             {
-              name: '商品分类'
+              name: '商品分类',
+              path: '/shopClass'
             },
             {
-              name: '分类参数'
+              name: '分类参数',
+              path: '/shopParameter'
             },
           ]
         },
@@ -57,10 +64,12 @@ class UserController extends Controller {
           name: '活动',
           children: [
             {
-              name: '秒杀活动'
+              name: '秒杀活动',
+              path: '/seckill'
             },
             {
-              name: '拼团活动'
+              name: '拼团活动',
+              path: '/groupWork'
             },
           ]
         },
@@ -68,10 +77,12 @@ class UserController extends Controller {
           name: '营销',
           children: [
             {
-              name: '优惠券'
+              name: '优惠券',
+              path: '/coupon'
             },
             {
-              name: '红包'
+              name: '红包',
+              path: '/redEnvelopes'
             },
           ]
         },
@@ -79,10 +90,12 @@ class UserController extends Controller {
           name: '用户管理',
           children: [
             {
-              name: '用户列表'
+              name: '用户列表',
+              path: '/userList'
             },
             {
-              name: '会员中心'
+              name: '会员中心',
+              path: '/vip'
             },
           ]
         },
@@ -90,7 +103,8 @@ class UserController extends Controller {
           name: '订单管理',
           children: [
             {
-              name: '订单列表'
+              name: '订单列表',
+              path: '/order'
             },
           ]
         },

@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const goods = require('../data/goods');
 
 class UserController extends Controller {
   // 添加商品
@@ -18,9 +19,14 @@ class UserController extends Controller {
   // 查询商品
   async getShop() {
     //查询
-    let shoplists = await this.ctx.model.Shoplist.find()
+    /* let shoplists = await this.ctx.model.Shoplist.find()
     this.ctx.body = {
       data: shoplists
+    } */
+    this.ctx.body = {
+      code: 200,
+      msg: 'success',
+      data: goods
     }
   }
 }
