@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const svgCaptcha = require('svg-captcha');
 
 class UserController extends Controller {
   // 登录
@@ -8,25 +9,33 @@ class UserController extends Controller {
     let { ctx, app } = this;
     // 如果给前端返回数据
     // post请求传来的参数
-    let { username, password } = ctx.request.body
+    let { captcha } = ctx.session
+    let { username, password, code } = ctx.request.body
     let user = await ctx.model.User.findOne({
       username,
-      password
+      password,
     })
     if (user) {
-      // 用户存在,生成token
-      const token = app.jwt.sign({
-        name: user.name,
-      }, app.config.jwt.secret);
-
-      ctx.session.user = user;
-
-      ctx.body = {
-        code: 200,
-        msg: '登录成功',
-        data: user,
-        token
+      console.log(code,captcha, captcha === code);
+      if (captcha && captcha === code) {
+        // 用户存在,生成token
+        const token = app.jwt.sign({
+          name: user.name,
+        }, app.config.jwt.secret);
+        ctx.session.user = user;
+        ctx.body = {
+          code: 200,
+          msg: '登录成功',
+          data: user,
+          token
+        }
+      } else {
+        ctx.body = {
+          code: 500,
+          msg: '验证码错误或者验证码过期',
+        }
       }
+
     } else {
       ctx.body = {
         code: 500,
@@ -100,6 +109,24 @@ class UserController extends Controller {
       data: users
     }
   }
+  // 图形验证码
+  async captcha() {
+    const captcha = svgCaptcha.create({
+      size: 4,
+      fontSize: 50,
+      ignoreChars: 'OoliABCDEFGHIJKLMNPQRSTUVWXYZ',
+      width: 100,
+      height: 40,
+      noise: 3,
+      color: true,
+      background: '#cc9966',
+    });
+    this.ctx.session.captcha = captcha.text;
+    //console.log(captcha.text);
+    this.ctx.response.type = 'image/svg+xml';
+    this.ctx.body = captcha.data;
+    // 设置session过期时间
+    this.ctx.session.maxAge = 1000 * 60
+  }
 }
-
 module.exports = UserController;

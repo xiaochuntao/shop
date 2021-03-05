@@ -3,29 +3,33 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
-  async addCarousel() {
+  // 添加参数
+  async addClass() {
     // 接收前端传递的参数
     let { ctx, app } = this;
-      // 添加
-    let carousel = new app.model.Carousel(ctx.request.body)
-    await carousel.save()
+    // 添加
+    let className = new app.model.Class(ctx.request.body)
+    await className.save()
     ctx.body = {
       code: 200,
-      msg: '添加成功'
+      msg: '商品添加成功'
     }
   }
-  async carousel() {
+  // 查询参数
+  async getClass() {
     //查询
-    let carousels = await this.ctx.model.Carousel.find()
+    let classes = await this.ctx.model.Class.find()
     this.ctx.body = {
-      data: carousels
+      data: classes
     }
   }
-  async changeCarousel() {
+  async changeClass() {
     // 修改
-    let { id, url } = this.ctx.request.body
-    let res = await this.ctx.model.Carousel.findByIdAndUpdate(id, {
-      url
+    let { id, className, classLastName, desc } = this.ctx.request.body
+    let res = await this.ctx.model.Class.findByIdAndUpdate(id, {
+      className,
+      classLastName,
+      desc
     })
     if (res) {
       this.ctx.body = {
@@ -39,10 +43,10 @@ class UserController extends Controller {
       }
     }
   }
-  async deletCarousel() {
+  async deleteClass() {
     // 删除
     let { id } = this.ctx.request.body
-    let res = await this.ctx.model.Carousel.findOneAndRemove({
+    let res = await this.ctx.model.Class.findOneAndRemove({
       _id: id
     })
     if (res) {

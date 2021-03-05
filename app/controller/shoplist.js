@@ -19,14 +19,81 @@ class UserController extends Controller {
   // 查询商品
   async getShop() {
     //查询
-    /* let shoplists = await this.ctx.model.Shoplist.find()
+    let shoplists = await this.ctx.model.Shoplist.find()
     this.ctx.body = {
       data: shoplists
-    } */
-    this.ctx.body = {
+    }
+    /* this.ctx.body = {
       code: 200,
       msg: 'success',
       data: goods
+    } */
+  }
+  async changeShop() {
+    // 修改
+    let { id, shopName, newProduct, recommend, seckill, groupWork, shopPrice, shopNumber, shopImages, desc, text, className, classLastName } = this.ctx.request.body
+    let res = await this.ctx.model.Shoplist.findByIdAndUpdate(id, {
+      shopName,
+      newProduct,
+      recommend,
+      seckill,
+      groupWork,
+      shopPrice,
+      shopNumber,
+      shopImages,
+      desc,
+      text,
+      className,
+      classLastName,
+    })
+    if (res) {
+      this.ctx.body = {
+        code: 200,
+        msg: '修改成功'
+      }
+    } else {
+      this.ctx.body = {
+        code: 500,
+        msg: '修改失败'
+      }
+    }
+  }
+  async deleteShop() {
+    // 删除
+    let { id } = this.ctx.request.body
+    let res = await this.ctx.model.Shoplist.findOneAndRemove({
+      _id: id
+    })
+    if (res) {
+      this.ctx.body = {
+        code: 200,
+        msg: '删除成功'
+      }
+    } else {
+      this.ctx.body = {
+        code: 500,
+        msg: '删除失败'
+      }
+    }
+  }
+  // 搜索
+  async search() {
+    let { value } = this.ctx.request.body
+    if (!value) {
+      this.error('缺少参数value')
+      return
+    }
+    let pageSize = 20
+    let page = this.ctx.request.body.page || 1
+    let skip = (page - 1) * pageSize
+    const count = await this.ctx.model.Shoplist.find({ 'shopName': { $regex: value } }).countDocuments()
+    const list = await this.ctx.model.Shoplist.find({ 'shopName': { $regex: value } }).skip(skip).limit(pageSize)
+    this.ctx.body = {
+      code: 200,
+      data: {
+        list,
+        count
+      }
     }
   }
 }

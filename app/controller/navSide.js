@@ -24,87 +24,112 @@ class UserController extends Controller {
       data: [
         {
           name: '首页',
+          path: '/',
+          icon: 'HomeOutlined'
+        },
+        {
+          name: '管理',
+          icon: 'SettingOutlined',
           children: [
             {
               name: '轮播图',
-              path: '/carousel'
+              path: '/carousel',
+              icon: 'SwapOutlined'
             },
             {
               name: '好评排行',
-              path: '/praise'
+              path: '/praise',
+              icon: 'LikeOutlined'
             },
             {
               name: '新品好物',
-              path: '/newProducts'
+              path: '/newProducts',
+              icon: 'SmileOutlined'
             },
             {
               name: '推荐',
-              path: '/recommend'
+              path: '/recommend',
+              icon: 'ThunderboltOutlined'
             },
           ]
         },
         {
           name: '商品',
+          icon: 'ShoppingOutlined',
           children: [
             {
               name: '商品列表',
-              path: '/shopList'
+              path: '/shopList',
+              icon: 'ReconciliationOutlined'
             },
             {
               name: '商品分类',
-              path: '/shopClass'
+              path: '/shopClass',
+              icon: 'QrcodeOutlined'
             },
             {
               name: '分类参数',
-              path: '/shopParameter'
+              path: '/shopParameter',
+              icon: 'ScheduleOutlined'
             },
           ]
         },
         {
           name: '活动',
+          icon: 'FireOutlined',
           children: [
             {
               name: '秒杀活动',
-              path: '/seckill'
+              path: '/seckill',
+              icon: 'FireOutlined'
             },
             {
               name: '拼团活动',
-              path: '/groupWork'
+              path: '/groupWork',
+              icon: 'FireOutlined'
             },
           ]
         },
         {
           name: '营销',
+          icon: 'DollarOutlined',
           children: [
             {
               name: '优惠券',
-              path: '/coupon'
+              path: '/coupon',
+              icon: 'CreditCardOutlined'
             },
             {
               name: '红包',
-              path: '/redEnvelopes'
+              path: '/redEnvelopes',
+              icon: 'MobileOutlined'
             },
           ]
         },
         {
-          name: '用户管理',
+          name: '用户',
+          icon: 'UserOutlined',
           children: [
             {
               name: '用户列表',
-              path: '/userList'
+              path: '/userList',
+              icon: 'TeamOutlined'
             },
             {
               name: '会员中心',
-              path: '/vip'
+              path: '/vip',
+              icon: 'SketchOutlined'
             },
           ]
         },
         {
-          name: '订单管理',
+          name: '订单',
+          icon: 'ProfileOutlined',
           children: [
             {
               name: '订单列表',
-              path: '/order'
+              path: '/order',
+              icon: 'ReadOutlined'
             },
           ]
         },
