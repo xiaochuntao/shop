@@ -7,9 +7,14 @@ module.exports = app => {
   const { router, controller } = app;
   // 登录
   router.post('/user/login', controller.user.login);
+  // 注册
   router.post('/user/register', controller.user.register);
-  router.post('/user', controller.user.user);
-  router.get('/user/user', controller.user.getUser);
+  // 修改用户
+  router.post('/changeUser', controller.user.changeUser);
+  // 删除用户
+  router.post('/deleteUser', controller.user.deleteUser);
+  // 获取用户列表
+  router.get('/user', controller.user.getUser);
   // 图形验证码
   router.get('/captcha', controller.user.captcha);
 
@@ -86,7 +91,7 @@ module.exports = app => {
   // 直接购买提交订单
   router.post('/addOrder', controller.order.addOrder);
   // 购物车购买提交订单
-  router.post('/order', controller.order.addOrder);
+  router.post('/order', controller.order.order);
   // 订单删除
   router.post('/deleteOrde', controller.order.deleteOrde);
 };

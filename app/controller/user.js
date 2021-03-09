@@ -16,7 +16,7 @@ class UserController extends Controller {
       password,
     })
     if (user) {
-      console.log(code,captcha, captcha === code);
+      console.log(code, captcha, captcha === code);
       if (captcha && captcha === code) {
         // 用户存在,生成token
         const token = app.jwt.sign({
@@ -68,13 +68,13 @@ class UserController extends Controller {
       }
     }
   }
-  async user() {
+  async deleteUser() {
     // 删除
-    // let { id } = this.ctx.request.body
-    /* let res = await this.ctx.model.User.findOneAndRemove({
+    let { id } = this.ctx.request.body
+    let res = await this.ctx.model.User.findOneAndRemove({
       _id: id
-    }) */
-    /* if (res) {
+    })
+    if (res) {
       this.ctx.body = {
         code: 200,
         msg: '删除成功'
@@ -84,11 +84,13 @@ class UserController extends Controller {
         code: 500,
         msg: '删除失败'
       }
-    } */
+    }
+  }
+  async changeUser() {
     // 修改
-    let { id, username } = this.ctx.request.body
+    let { id, integral } = this.ctx.request.body
     let res = await this.ctx.model.User.findByIdAndUpdate(id, {
-      username
+      integral,
     })
     if (res) {
       this.ctx.body = {

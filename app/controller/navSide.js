@@ -37,11 +37,6 @@ class UserController extends Controller {
               icon: 'SwapOutlined'
             },
             {
-              name: '好评排行',
-              path: '/praise',
-              icon: 'LikeOutlined'
-            },
-            {
               name: '新品好物',
               path: '/newProducts',
               icon: 'SmileOutlined'
@@ -114,12 +109,7 @@ class UserController extends Controller {
               name: '用户列表',
               path: '/userList',
               icon: 'TeamOutlined'
-            },
-            {
-              name: '会员中心',
-              path: '/vip',
-              icon: 'SketchOutlined'
-            },
+            }
           ]
         },
         {
