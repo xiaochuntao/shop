@@ -23,11 +23,37 @@ class UserController extends Controller {
     this.ctx.body = {
       data: shoplists
     }
-    /* this.ctx.body = {
+  }
+  // 查询商品详情
+  async getShopD() {
+    let { id } = this.ctx.request.body
+    let { ctx, app } = this
+    if (!ctx.request.body.id) {
+      this.error('缺少重要参数id')
+      return
+    }
+    let shoplists = await this.ctx.model.Shoplist.findOne({ _id: id })
+    let shoplist = new app.model.Shoplist({
+      shopName: shoplists.shopName,
+      shopPrice: shoplists.shopPrice,
+      newProduct: shoplists.newProduct,
+      recommend: shoplists.recommend,
+      seckill: shoplists.seckill,
+      groupWork: shoplists.groupWork,
+      shopNumber: shoplists.shopNumber,
+      shopTime: shoplists.shopTime,
+      shopImages: shoplists.shopImages,
+      desc: shoplists.desc,
+      text: shoplists.text,
+      className: shoplists.className,
+      classLastName: shoplists.classLastName,
+      integral: shoplists.integral,
+      cid: shoplists.id,
+    })
+    this.ctx.body = {
+      data: shoplist,
       code: 200,
-      msg: 'success',
-      data: goods
-    } */
+    }
   }
   async changeShop() {
     // 修改

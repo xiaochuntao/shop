@@ -59,6 +59,7 @@ module.exports = app => {
       type: Number,
       default: +new Date(),
     },
+    cid: String,
   })
   return mongoose.model('Shoplist', ShopSchema)
 }

@@ -15,6 +15,8 @@ module.exports = app => {
   router.post('/deleteUser', controller.user.deleteUser);
   // 获取用户列表
   router.get('/user', controller.user.getUser);
+  // 获取个人用户
+  router.post('/queryUser', controller.user.queryUser);
   // 图形验证码
   router.get('/captcha', controller.user.captcha);
 
@@ -28,6 +30,8 @@ module.exports = app => {
   router.post('/shoplist/addShop', controller.shoplist.addshop);
   // 获取商品
   router.get('/shoplist/getShop', controller.shoplist.getShop);
+  // 获取商品详情
+  router.post('/shoplist/getShopD', controller.shoplist.getShopD);
   // 修改商品
   router.post('/shoplist/changeShop', controller.shoplist.changeShop);
   // 删除商品

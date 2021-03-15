@@ -2,6 +2,7 @@
 
 const Controller = require('egg').Controller;
 const svgCaptcha = require('svg-captcha');
+const USERSTR = '_id avatar day gender month username year'
 
 class UserController extends Controller {
   // 登录
@@ -109,6 +110,37 @@ class UserController extends Controller {
     let users = await this.ctx.model.User.find()
     this.ctx.body = {
       data: users
+    }
+  }
+  // 用户查询
+  async queryUser() {
+    let { id } = this.ctx.request.body
+    let { ctx, app } = this
+    if (!ctx.request.body.id) {
+      this.error('缺少重要参数id')
+      return
+    }
+    let userInfo = await this.ctx.model.User.findById(this.ctx.session._id)
+    let users = await this.ctx.model.User.findOne({ _id: id })
+    let user = new app.model.User({
+      cid: users._id,
+      username: users.username,
+      integral: users.integral,
+      userClass: users.userClass,
+      password: users.password,
+    })
+    // await user.save()
+    if (!userInfo) {
+      // this.error('用户名不存在')
+      // return
+      this.ctx.body = {
+        code: 500,
+        msg: '用户名不存在'
+      }
+    }
+    this.ctx.body = {
+      code: 200,
+      user
     }
   }
   // 图形验证码
